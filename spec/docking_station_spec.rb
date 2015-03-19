@@ -24,4 +24,11 @@ describe DockingStation do
     DockingStation::DEFAULT_CAPACITY.times { subject.dock double :bike }
     expect { subject.dock double :bike }.to raise_error 'Station Full'
   end
+  it 'capacity can be set' do
+    expect(subject).to respond_to :capacity=
+  end
+  it 'does not raises error if capacity not reached' do
+    subject.capacity = 50
+    expect { 45.times { subject.dock double :bike } }.not_to raise_error
+  end
 end
